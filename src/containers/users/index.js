@@ -1,27 +1,29 @@
 import React, { useEffect } from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { usersSelector } from "../../store/users/selector";
-import {fetchUsersStartThunk} from '../../store/users/thunks'
+import { fetchUsersStartThunk } from "../../store/users/thunks";
+import { Link } from "react-router-dom";
 
 const UserContainer = () => {
   const users = useSelector(usersSelector);
-  debugger
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUsersStartThunk())
-  }, [])
+    dispatch(fetchUsersStartThunk());
+  }, []);
 
   return (
     <div>
       <h1>Users</h1>
       <div>
-        {users&&users.length > 1 &&
+        {users &&
+          users.length > 1 &&
           users.map((user) => (
-            <div key={user.id}>
-              {/* <button onClick={editUserStart}>Edit</button> */}
-              <div>{user.name}</div>
-              {/* <button onClick={deleteUserStart}>Delete</button> */}
+            <div className="row p-1 border border-1" key={user.id}>
+                <div className="col-9">{user.name}</div>
+                <div className="col-3 d-flex justify-content-end">
+                  <Link to={`/users/delete/${user.id}`} className="btn btn-danger btn-sm">Delete</Link>
+                </div>
             </div>
           ))}
       </div>
