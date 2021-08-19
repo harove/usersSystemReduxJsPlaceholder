@@ -11,7 +11,7 @@ import {
 } from "./constants";
 
 const initialState = {
-  isFetching: false,
+  isFetching: 'iddle',
   data: [],
   errorMessage: null,
   message: null,
@@ -22,12 +22,12 @@ const usersReducer = (state = initialState, action) => {
     case FETCH_USERS_START:
       return {
         ...state,
-        isFetching: true,
+        isFetching: 'loading',
       };
     case FETCH_USERS_SUCCESS:
       return {
         ...state,
-        isFetching: false,
+        isFetching: 'succeeded',
         data: action.payload,
       };
     case FETCH_USERS_FAILURE:
@@ -40,13 +40,13 @@ const usersReducer = (state = initialState, action) => {
     case DELETE_USER_START:
       return {
         ...state,
-        isFetching: true,
+        isFetching: 'loading',
       };
     case DELETE_USER_SUCCESS:
       return {
         ...state,
-        isFetching: false,
-        data: state.data.filter((user) => user.id !== action.payload),
+        isFetching: 'succeeded',
+        data: action.payload,
       };
     case DELETE_USER_FAILURE:
       return {
@@ -57,12 +57,12 @@ const usersReducer = (state = initialState, action) => {
     case CREATE_USER_START:
       return {
         ...state,
-        isFetching: true,
+        isFetching: 'loading',
       };
     case CREATE_USER_SUCCESS:
       return {
         ...state,
-        isFetching: false,
+        isFetching: 'succeeded',
         data: [...state.data, action.payload],
       };
     case CREATE_USER_FAILURE:

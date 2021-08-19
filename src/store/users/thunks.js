@@ -36,14 +36,14 @@ export const fetchUsersStartThunk = () => {
 
 export const deleteUserThunk = (id) => {
   return async (dispatch, getState) => {
-    // const { users } = getState();
+    const { users } = getState();
     // if (users.data.length > 10) {
     //   return;
     // }
     dispatch(deleteUserStart(id));
     try {
       const requestOptions = {
-        method: "POST"
+        method: "DELETE"
       };
       const response = await fetch(
         `https://jsonplaceholder.typicode.com/users/${id}`,

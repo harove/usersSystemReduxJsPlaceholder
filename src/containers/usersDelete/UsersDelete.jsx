@@ -11,15 +11,16 @@ function UsersDelete() {
   const dispatch = useDispatch()
   const history = useHistory()
 
+
   useEffect(() => {
     const user = users.find((user) => user.id === parseInt(id));
     setName(user.name);
-  }, []);
+  },[]);
 
 
   const handlerDelete = ()=>{
     dispatch(deleteUserThunk(id))
-    history.push("/")
+    history.push('/')
   }
 
   return (

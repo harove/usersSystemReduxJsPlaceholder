@@ -11,6 +11,8 @@ import {
   
 } from "./constants";
 
+import store from "../index";
+
 export const fetchUsersStart = () => ({
   type: FETCH_USERS_START,
 });
@@ -27,10 +29,14 @@ export const deleteUserStart = () => ({
   type: DELETE_USER_START,
 });
 
-export const deleteUserSuccess = (id) => ({
-  type: DELETE_USER_SUCCESS,
-  payload: parseInt(id)
-});
+export const deleteUserSuccess = (id) => {
+  const {users: usuarios} = store.getState()
+  const users = usuarios.data
+  return ({
+    type: DELETE_USER_SUCCESS,
+    payload: users.filter(user=>user.id !== parseInt(id))
+  });
+}
 
 export const deleteUserFailure = (errorMessage) => ({
   type: DELETE_USER_FAILURE,
